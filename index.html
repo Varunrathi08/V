@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <!-- Preload 'yes.html' -->
+    <link rel="preload" href="yes.html" as="document">
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h1 class="header_text">Do you wanna be my Valentine?</h1>
+            <h1 class="header_text"></h1>
+        </div>
+        <div class="gif_container">
+            <img src="dudu.gif" alt="Cute animated illustration">
+        </div>
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        emailjs.init("wsmXre9RtBeckleXn"); // Replace "your_emailjs_user_id" with your actual EmailJS user ID
+
+        async function sendEmail() {
+            try {
+                const response = await emailjs.send("service_uxj9uho", "template_avkslyq", {
+                    to_email: "varunrathi.20@wud.ac.in",
+                });
+                console.log("Email sent successfully:", response);
+
+                // Redirect to 'yes.html' without waiting for it to load
+                window.location.href = "yes.html";
+            } catch (error) {
+                console.log("Failed to send email:", error);
+            }
+        }
+
+        function nextPage() {
+            sendEmail();
+        }
+
+        function moveButton() {
+            var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
+            var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
+            document.getElementById('noButton').style.left = `${x}px`;
+            document.getElementById('noButton').style.top = `${y}px`;
+        }
+    </script>
+
+    
+</body>
+
+</html>
